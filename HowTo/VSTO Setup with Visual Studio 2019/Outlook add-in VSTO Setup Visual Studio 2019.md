@@ -33,7 +33,7 @@ By default, Visual Studio 2019 does not have a Setup project template.  These te
 * Next, the registry needs to be configured.  Open the registry view.
 ![Open Registry view](images/Installer%20views.png)
 
-* The final step is to configure the registry.  You should be able to copy the settings from the developer machine, remembering to update the manifest reference.  This installation will only work for the user that installs as the registry keys target HKCU.  For all-user add-ins, the appropriate registry keys need to be added to HKLM.
+* The final step is to configure the registry.  You should be able to copy the settings from the developer machine, remembering to update the manifest reference.  This installation will only work for the user that installs as the registry keys target HKCU.  For all-user add-ins, the appropriate registry keys need to be added to HKLM.  Further information on registry settings can be found here: https://docs.microsoft.com/en-us/visualstudio/vsto/registry-entries-for-vsto-add-ins?view=vs-2019.
 ![Add registry keys](images/Registry%20-%20configure%20HKCU.png)
 
 * The Setup project can now be built, and once done you'll find Setup.exe and an .msi in the output folder of the project.
