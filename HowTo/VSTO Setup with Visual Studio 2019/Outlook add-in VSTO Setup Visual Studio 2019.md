@@ -4,7 +4,7 @@ This guide describes the process to create a Setup project (.msi installer) for 
 
 # Install the Visual Studio Installer Projects extension
 
-By default, Visual Studio 2019 does not have a Setup project template.  These templates can be added by installed the Visual Studio Installer Projects extension.
+By default, Visual Studio 2019 does not have a Setup project template.  These templates can be added by installing the Visual Studio Installer Projects extension.
 
 * Open Visual Studio.
 
