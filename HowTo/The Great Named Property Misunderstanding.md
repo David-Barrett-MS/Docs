@@ -28,9 +28,9 @@ It is the first two steps that are the tricky ones, but so long as you know the 
 
 I wrote two scripts to do this.  The first script is run against the mailbox (or mailbox database, or whole organisation if you like) and it will search for the offending named properties and create a list of items that contain them (including which properties are on those items).  The second script runs against the mailbox to remove the named properties (no need to delete the items anymore, the script targets the properties specifically and leaves the rest of the item alone).
 
-Check-NamedProps:
+Check-NamedProps: https://github.com/David-Barrett-MS/PowerShell-EWS-Scripts/blob/master/Legacy/Check-NamedProps.ps1
 
-Delete-ByEntryId:
+Delete-ByEntryId: https://github.com/David-Barrett-MS/PowerShell-EWS-Scripts/blob/master/Legacy/Delete-ByEntryId.ps1
 
 ## Example repair of a single mailbox
 
