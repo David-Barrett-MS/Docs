@@ -8,7 +8,7 @@ The two issues are these:
 
 Note that there are other ways to create too many named properties that may not match the patterns described above, but the scripts described here are likely to be of limited (if any) help in those cases.
 
-The problem is that named properties have their own table (so that they can be searched easily).  Too many named properties can exhaust this table, as the table contains all named properties that have been defined in that mailbox.
+Named properties have their own table within a mailbox, and for performance reasons the size of this table is limited.  Too many named properties can exhaust this table, as the table contains all named properties that have been defined in that mailbox.  When the table is exhausted, no new named properties can be created.
 
 Ever since named properties were introduced, we've intermittently had issues of the named property table being exhausted (due to misbehaving applications), and have published the following advice to clean the mailbox:
 * List all the named properties in the mailbox (using a tool such as MFCMapi).
@@ -42,5 +42,5 @@ To repair a single mailbox, the process is as follows:
 * Load Check-NamedProps.ps1 to make the Check-NamedProps function available (the script needs to be dot dot loaded).
 * Call Check-NamedProps against the mailbox you want to fix (note that this can take a long time to run).  Depending upon the properties you are searching for, you may need to use some of the other parameters available.  The script supports wild card name searches, so if you want to find all named properties that start with 'badproperty', you can search for 'badproperty*'.
 * Check the output folder to see the filename for the list of EntryIds that the above creates (the script uses the mailbox Guid for the dump files, and each EntryId file will have the SMTP address of the mailbox as the first line).  The next step is to use Delete-ByEntryId.ps1 to delete the EntryIds (this can also take a long time):
-* After the properties have been deleted, they will still be in the named properties table of the mailbox, so the final step is to move the mailbox to another database without preserving that table (which means it is rebuilt, and therefore won't contain the now deleted named properties).  Do this using [New-MoveRequest](https://docs.microsoft.com/en-us/powershell/module/exchange/new-moverequest?view=exchange-ps) and ensure that -DoNotPreserveMailboxSignature is specified.
+* After the properties have been deleted, they will still be in the named properties table of the mailbox, so the final step is to move the mailbox to another database without preserving that table (which means it is rebuilt, and therefore won't contain the now deleted named properties).  Do this using [New-MoveRequest](https://docs.microsoft.com/en-us/powershell/module/exchange/new-moverequest?view=exchange-ps) and ensure that `-DoNotPreserveMailboxSignature` is specified.
 * Once the mailbox move is complete, the named properties should be gone.  You can confirm this by running Check-NamedProps against it again (it should return 0 named properties after the move).
