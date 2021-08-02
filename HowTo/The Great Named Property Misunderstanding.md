@@ -20,7 +20,7 @@ The process above works, but it can be incredibly time consuming to do the first
 
 # Automatically repairing the mailbox
 
-We regularly receive cases where customers have been in the process of migrating to Office 365 and the named properties issue has blocked them.  Given that there have been many mailboxes affected, and hundreds of named properties per mailbox, the manual process to clear the properties was simply not feasible.  It is finally time for the process to be automated.
+We regularly receive cases where customers have been in the process of migrating to Office 365 and the named properties issue has blocked them.  Given that there may be many mailboxes affected, and hundreds of named properties per mailbox, the manual process to clear the properties is simply not feasible.  This guide outlines an automated process for clearing the named properties in such a situation.
 
 Note that this process only works against an on-premises mailbox. The Check-NamedProps script cannot be run against an Exchange Online mailbox.  You need to ensure that any invalid named properties are removed from the mailbox before migration to Office 365.
 
