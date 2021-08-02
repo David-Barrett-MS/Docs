@@ -1,4 +1,4 @@
-# Summary
+# The Great Named Property Misunderstanding
 
 Ever since they were introduced, it seems that developers new to Exchange programming have misunderstood named properties.  This can go unnoticed for a long time, but there are a couple of specific common issues that can block mailbox migrations (particularly from on-premises environments to Office 365).
 
