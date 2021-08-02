@@ -14,7 +14,7 @@ Ever since named properties were introduced, we've intermittently had issues of 
 * List all the named properties in the mailbox (using a tool such as MFCMapi).
 * Go through the mailbox (manually) deleting the items or properties from the items until the named property count is within reasonable limits (usually this involves deleting all named properties that were created by a particular application).
 * Purge retention (as otherwise the deleted items, with the offending properties, will still be in the mailbox).
-* Move the mailbox to another database using the -DoNotPreserveMailboxSignature parameter (this moves the mailbox but does not copy the named property table, which is instead rebuilt).
+* Move the mailbox to another database using the `-DoNotPreserveMailboxSignature` parameter (this moves the mailbox but does not copy the named property table, which is instead rebuilt).
 
 The process above works, but it can be incredibly time consuming to do the first two steps.
 
