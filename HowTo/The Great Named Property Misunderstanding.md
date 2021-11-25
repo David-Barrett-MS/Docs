@@ -8,7 +8,7 @@ The two issues are these:
 
 Note that there are other ways to create too many named properties that may not match the patterns described above, but the scripts described here are likely to be of limited (if any) help in those cases.
 
-Named properties have their own table within a mailbox, and for performance reasons the size of this table is limited.  Too many named properties can exhaust this table, as the table contains all named properties that have been defined in that mailbox.  When the table is exhausted, no new named properties can be created.
+Named properties have their own table within a mailbox, and for performance reasons the size of this table is limited.  Too many named properties can exhaust this table, as the table contains all named properties that have been defined in that mailbox.  When the table is exhausted, no new named properties can be created, and you may start to receive errors when accessing existing items in the mailbox.
 
 Ever since named properties were introduced, we've intermittently had issues of the named property table being exhausted (due to misbehaving applications), and have published the following advice to clean the mailbox:
 * List all the named properties in the mailbox (using a tool such as MFCMapi).
