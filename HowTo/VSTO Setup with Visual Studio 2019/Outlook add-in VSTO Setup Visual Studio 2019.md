@@ -15,7 +15,7 @@ By default, Visual Studio 2019 does not have a Setup project template.  These te
 
 * Download and install the extension, and then restart Visual Studio.
 
-# Add and configure a Seup project to the Outlook add-in solution
+# Add and configure a Setup project to the Outlook add-in solution
 
 * Open the Outlook add-in solution.
 
