@@ -24,11 +24,11 @@ For Exchange Online, Graph is used to send the welcome message and so an applica
 
 If the script is run from a PowerShell console where the Exchange Online module is not available, it will attempt to automatically connect.  This will trigger an auth prompt.  This is an example of a successful script run where one new mailbox was found:
 
-![PowerShell Console screenshot showing successful script execution](images/EXOPSTest.png?raw=true)
+![PowerShell Console screenshot showing successful script execution](Images/EXOPSTest.png?raw=true)
 
 And here is the message that was received:
 
-![Welcome Message displayed in OWA](images/EXOSampleMessage.png?raw=true)
+![Welcome Message displayed in OWA](Images/EXOSampleMessage.png?raw=true)
 
 ## Notes
 
