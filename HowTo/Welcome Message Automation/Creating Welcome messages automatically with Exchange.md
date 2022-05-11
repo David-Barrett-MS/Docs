@@ -8,7 +8,7 @@ Obtaining the list of mailboxes created since a particular date can be done with
 
 I have written a sample script that shows how to implement the above process and can send a message using SMTP or Graph.  The script shows how a message template (in HTML) can be used with custom fields so that the message can be personalised (e.g. using the recipient's first name), and an embedded image attached.
 
-You can find the script and the sample files [here](Code/)
+You can find the script and the sample files [here](Code/).
 
 ## Sample Walk-through for Exchange Online
 
@@ -24,11 +24,11 @@ For Exchange Online, Graph is used to send the welcome message and so an applica
 
 If the script is run from a PowerShell console where the Exchange Online module is not available, it will attempt to automatically connect.  This will trigger an auth prompt.  This is an example of a successful script run where one new mailbox was found:
 
-![PowerShell Console screenshot showing successful script execution](images/EXOPSTest.png)
+![PowerShell Console screenshot showing successful script execution](images/EXOPSTest.png?raw=true)
 
 And here is the message that was received:
 
-![Welcome Message displayed in OWA](images/EXOSampleMessage.png)
+![Welcome Message displayed in OWA](images/EXOSampleMessage.png?raw=true)
 
 ## Notes
 
