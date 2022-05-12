@@ -34,6 +34,7 @@ And here is the message that was received:
 
 * The script would need modification to run unattended (due to the current Exchange PowerShell implementation).  This is commented in the script with a link to the appropriate docs.
 * This is a sample script and should only be used for testing purposes or as a basis for further development.  It is not resilient at all (e.g. if the message send fails, it isn't reattempted).
+* The script only supports .png and .jpg attachments, and they are always attached as inline images.
 
 
 ## Send-WelcomeMessage.ps1 Parameters
