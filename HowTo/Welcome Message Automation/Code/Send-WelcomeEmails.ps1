@@ -78,7 +78,7 @@ param (
 	[string]$LogFile = ""
 )
 
-$script:ScriptVersion = "1.0.0"
+$script:ScriptVersion = "1.0.1"
 
 # Default config.  First time the script is run it will check for any new mailboxes created today.  On subsequent runs, it checks from the last check date (which is saved in the config file).
 $script:config = @{ "LastDateCheck" = [DateTime]::Today }
@@ -268,7 +268,8 @@ Function SendWithSystemNetMail
 	foreach ($linkedResource in $MessageAttachments)
 	{
         $image = $null
-		$image = New-Object System.Net.Mail.LinkedResource("$MessageFolder\$linkedResource")
+        $imageFile = Get-Item $ConfigFolder$linkedResource
+		$image = New-Object System.Net.Mail.LinkedResource("$($imageFile.VersionInfo.FileName)")
         if ($image -ne $null)
         {
 		    $image.ContentId = $linkedResource
@@ -454,7 +455,14 @@ Function CreateMessageBody
     )
 
 	# Read the HTML template
-	$messageBody = [string](Get-Content $MessageTemplate)
+    if ([string]::IsNullOrEmpty($ConfigFolder))
+    {
+	    $messageBody = [string](Get-Content $MessageTemplate)
+    }
+    else
+    {
+        $messageBody = [string](Get-Content $ConfigFolder$MessageTemplate)
+    }
 
     # Replace any fields within the template.  Further fields can be added here as required
 	$messageBody = $messageBody.Replace("#UserFirstName#", $user.FirstName) # #UserFirstName# : user's first name
@@ -513,8 +521,8 @@ if (Test-Path -Path "$ConfigFolder$($MyInvocation.MyCommand.Name).config") {
 }
 
 # Retrieve the list of mailboxes that have been created since we last checked
-$filter = "WhenMailboxCreated -gt '$($script:config["LastDateCheck"])'"
-$script:config["LastDateCheck"] = [DateTime]::Now
+$filter = "WhenMailboxCreated -gt '$($script:config["LastDateCheck"].ToLocalTime())'"
+$script:config["LastDateCheck"] = [DateTime]::UtcNow
 LogVerbose "Get-Mailbox -Filter $filter"
 $newMailboxes = Get-Mailbox -Filter $filter
 

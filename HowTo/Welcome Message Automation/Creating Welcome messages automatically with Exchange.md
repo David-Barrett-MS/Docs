@@ -24,11 +24,28 @@ For Exchange Online, Graph is used to send the welcome message and so an applica
 
 If the script is run from a PowerShell console where the Exchange Online module is not available, it will attempt to automatically connect.  This will trigger an auth prompt.  This is an example of a successful script run where one new mailbox was found:
 
-![PowerShell Console screenshot showing successful script execution](Images/EXOPSTest.png?raw=true)
+![PowerShell Console screenshot showing successful script execution against Exchange Online](Images/EXOPSTest.png?raw=true)
 
 And here is the message that was received:
 
 ![Welcome Message displayed in OWA](Images/EXOSampleMessage.png?raw=true)
+
+## Sample Walk-through for Exchange 2019 (on-premises)
+
+Graph is not available for Exchange 2019, so SMTP (via System.Net.Mail) is used to send the email in this environment.
+
+1. Prepare the email template files.  I've included a sample welcome.html with an embedded image to show how this can be done.  When the script attaches the image to the message, it will add a Content-Id as the image name so that it can be referenced in the HTML (e.g. `<img width=129 height=43 src="cid:image001.png" alt="MSFT_logo" v:shapes="Picture_x0020_1">`, as in the sample).  I've also included a single custom field `#UserFirstName#` that the script will replace with the user's first name (as returned by `Get-User`).
+
+2. Create a test mailbox.  The first time the script is run, it will check for any mailboxes created that day (since 00:00:00).  When it is run on subsequent occasions, it will check for mailboxes created since it was last run (it stores the last run time in a config file).  Note that if any mailboxes were created other than the test mailbox, the script will also send emails to those, so it is best to not test this in a production environment (as with all sample scripts).
+
+3. To successfully send the welcome message, the user creating the PowerShell session must have Send As rights for the mailbox being used to send the welcome message.  The script use default auth for SMTP (i.e. the logged on user's Windows credentials), and if the user does not have permission to send from the specified email address then it will fail.
+
+4. Run the script using appropriate parameters: `.\Send-WelcomeEmails.ps1 -MessageSubject "Test Welcome" -MessageSender welcome@e19.local -SMTPServer e1.e19.local -PowerShellUrl "http://e1.e19.local/PowerShell" -ExchangeCredential (Get-Credential)`.  Note that this example will prompt for credentials to connect to Exchange PowerShell.  In the screenshot below I use an alternative of assigning the credentials to a variable before calling the script.
+
+![PowerShell Console screenshot showing successful script execution against Exchange 2019](Images/E19PSTest.png?raw=true)
+
+![Welcome Message displayed in OWA](Images/E19SampleMessage.png?raw=true)
+
 
 ## Notes
 
