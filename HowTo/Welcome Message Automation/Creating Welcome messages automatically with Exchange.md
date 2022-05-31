@@ -66,6 +66,8 @@ Graph is not available for Exchange 2019, so SMTP (via System.Net.Mail) is used 
 
 `-SMTPServer`: SMTP server that will be used to send the welcome message (if not provided, Graph will be used to send).
 
+`-SMTPCredential`: Credentials that will be used to authenticate with the SMTP server.  If not specified, no auth (anonymous) is used.
+
 `-PowerShellUrl`: Exchange PowerShell URL (so that we can connect to Exchange).  If using Exchange Online, use -Office365 switch instead.
 
 `-ExchangeCredential`: Credentials used to authenticate with Exchange (only required when PowerShellUrl specified).
