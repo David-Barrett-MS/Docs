@@ -48,12 +48,16 @@ param (
 	[ValidateNotNullOrEmpty()]
 	[string]$SMTPServer = "",
 
+	[Parameter(Mandatory=$False,HelpMessage="Credentials that will be used to authenticate with the SMTP server.  If not specified, default auth (current user) will be attempted.")]
+	[ValidateNotNullOrEmpty()]
+	[PSCredential]$SMTPCredential,
+
 	[Parameter(Mandatory=$False,HelpMessage="Exchange PowerShell URL (so that we can connect to Exchange).  If using Exchange Online, use -Office365 switch instead.")]
 	[ValidateNotNullOrEmpty()]
 	[string]$PowerShellUrl,
 
 	[Parameter(Mandatory=$False,HelpMessage="Credentials used to authenticate with Exchange (only required when PowerShellUrl specified).")]
-    [System.Management.Automation.PSCredential]$ExchangeCredential,
+    [PSCredential]$ExchangeCredential,
 
 	[Parameter(Mandatory=$False,HelpMessage="If set, connect to Office 365 PowerShell as necessary (which will be if a session is not already available).")]
 	[switch]$Office365,
@@ -78,7 +82,7 @@ param (
 	[string]$LogFile = ""
 )
 
-$script:ScriptVersion = "1.0.1"
+$script:ScriptVersion = "1.0.2"
 
 # Default config.  First time the script is run it will check for any new mailboxes created today.  On subsequent runs, it checks from the last check date (which is saved in the config file).
 $script:config = @{ "LastDateCheck" = [DateTime]::Today }
@@ -256,9 +260,15 @@ Function SendWithSystemNetMail
 
 	# Create the objects we need to create the message and send the mail
     LogVerbose "Creating welcome message for $($recipient)"
-	$message = New-Object System.Net.Mail.MailMessage
-	$smtpClient = New-Object System.Net.Mail.SmtpClient($SMTPServer)
+    $message = New-Object System.Net.Mail.MailMessage
     LogVerbose "Using SMTP server: $SMTPServer"
+    $smtpClient = New-Object System.Net.Mail.SmtpClient($SMTPServer)
+
+    if ($SMTPCredential)
+    {
+        LogVerbose "Using authenticated SMTP"
+        $smtpClient.Credentials = $SMTPCredential
+    }
 
 
 	# Create the HTML view for this message
