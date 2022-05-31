@@ -48,7 +48,7 @@ param (
 	[ValidateNotNullOrEmpty()]
 	[string]$SMTPServer = "",
 
-	[Parameter(Mandatory=$False,HelpMessage="Credentials that will be used to authenticate with the SMTP server.  If not specified, default auth (current user) will be attempted.")]
+	[Parameter(Mandatory=$False,HelpMessage="Credentials that will be used to authenticate with the SMTP server.  If not specified, no auth (anonymous) is used.")]
 	[ValidateNotNullOrEmpty()]
 	[PSCredential]$SMTPCredential,
 
