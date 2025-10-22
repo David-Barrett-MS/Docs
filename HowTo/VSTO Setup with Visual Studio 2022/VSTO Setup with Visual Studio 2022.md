@@ -1,6 +1,6 @@
 # Overview
 
-This guide describes the process to create a Setup project (.msi installer) for a VSTO Outlook add-in developed using Visual Studio 2019.  Add-ins created with earlier versions of Visual Studio may need their existing Setup project deleted and recreated.
+This guide describes the process to create a Setup project (.msi installer) for a VSTO Outlook add-in developed using Visual Studio 2022.  Add-ins created with earlier versions of Visual Studio may need their existing Setup project deleted and recreated.
 
 # Install the Visual Studio Installer Projects extension
 
