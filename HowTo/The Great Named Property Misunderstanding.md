@@ -1,6 +1,6 @@
 # The Great Named Property Misunderstanding
 
-**Note**: There is now a much easier way to check and fix this issue for Exchange Online.  Please see https://learn.microsoft.com/en-us/troubleshoot/exchange/outlook-issues/named-property-quota-exceeded.
+> **Note**: There is now a much easier way to check and fix this issue for Exchange Online.  Please see https://learn.microsoft.com/en-us/troubleshoot/exchange/outlook-issues/named-property-quota-exceeded.
 
 Ever since they were introduced, it seems that developers new to Exchange programming have misunderstood named properties.  This can go unnoticed for a long time, but there are a couple of specific common issues that can block mailbox migrations (particularly from on-premises environments to Office 365).
 
@@ -47,4 +47,5 @@ To repair a single mailbox, the process is as follows:
 * Check the output folder to see the filename for the list of EntryIds that the above creates (the script uses the mailbox Guid for the dump files, and each EntryId file will have the SMTP address of the mailbox as the first line).  The next step is to use Delete-ByEntryId.ps1 to delete the properties from each of the listed items.  This process uses EWS, and by default uses ApplicationImpersonation to access the mailbox (so the authenticating account must be granted the relevant permissions).  Optionally, the whole item can be deleted instead by specifying -DeleteItems switch.  Example call: `.\Delete-ByEntryId.ps1 -EntryIds "C:\Scripts\60585fa4-0ef6-49fd-8dee-56f3f00f79c8.EntryIds.txt" -EwsUrl "https://e1.e19.local/EWS/Exchange.asmx" -Credentials ($ewsAuth) -LogFile "log.txt"`
 * After the properties have been deleted, they will still be in the named properties table of the mailbox, so the final step is to move the mailbox to another database without preserving that table (which means it is rebuilt, and therefore won't contain the now deleted named properties).  Do this using [New-MoveRequest](https://docs.microsoft.com/en-us/powershell/module/exchange/new-moverequest?view=exchange-ps) and ensure that `-DoNotPreserveMailboxSignature` is specified.
 * Once the mailbox move is complete, the bad named properties should be gone.  You can confirm this by running Check-NamedProps against it with the same search parameters (it should return 0 named properties after the move).
+
 
